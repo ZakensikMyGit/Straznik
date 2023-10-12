@@ -17,6 +17,10 @@ namespace ModuleEdycja.ViewModels
         private JednostkaPlywajaca _selectedJednPlyw;
         private FormaSluzby _selectedFormaSluzby;
 
+        private bool _isEditing;
+        public DelegateCommand EditCommand { get; set; }
+        public DelegateCommand SaveCommand { get; set; }
+
         public EdycjaViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             _eventAggregator = eventAggregator;
@@ -24,6 +28,29 @@ namespace ModuleEdycja.ViewModels
             _eventAggregator.GetEvent<SelectedMarynarzEvent>().Subscribe(UpdateSelectedMarynarz);
             _eventAggregator.GetEvent<SelectedJednPlywEvent>().Subscribe(UpdateSelectedJednPlyw);
             _eventAggregator.GetEvent<SelectedFormaSluzbyEvent>().Subscribe(UpdateSelectedFormaSluzby);
+
+            EditCommand = new DelegateCommand(StartEditing);
+            SaveCommand = new DelegateCommand(SaveChanges, CanSave).ObservesProperty(() => IsEditing);
+        }
+
+        public bool IsEditing
+        {
+            get {  return _isEditing; }
+            set { SetProperty(ref _isEditing, value); }
+        }
+        private void StartEditing()
+        {
+            IsEditing = true;
+        }
+        private void SaveChanges()
+        {
+            //
+            //
+            IsEditing = false;
+        }
+        private bool CanSave()
+        {
+            return IsEditing;
         }
 
         private bool _isEnabled;
@@ -34,13 +61,13 @@ namespace ModuleEdycja.ViewModels
             set {SetProperty (ref _isEnabled, value); }
         }
 
-        private DelegateCommand _buttonEditCommand;
-        public DelegateCommand ButtonEditCmd
+        private DelegateCommand _EditCommand;
+        public DelegateCommand EditCmd
         {
             get
             {
-                if (_buttonEditCommand == null) _buttonEditCommand = new DelegateCommand(IsEnabledAction);
-                return _buttonEditCommand;
+                if (_EditCommand == null) _EditCommand = new DelegateCommand(IsEnabledAction);
+                return _EditCommand;
             }
         }
 

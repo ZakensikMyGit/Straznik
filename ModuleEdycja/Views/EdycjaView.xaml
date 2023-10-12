@@ -13,9 +13,5 @@
         </Grid.RowDefinitions>
         <ContentControl Grid.Row="0" Name="SelectedViewContent" prism:RegionManager.RegionName="SelectedViewRegion"/>
         
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Edytuj" Command="{Binding ButtonEditCmd}" Margin="5,0" />
-            <Button Content="Zapisz" Margin="5,0" IsEnabled="{Binding IsEnabled}"/>
-        </StackPanel>
     </Grid>
 </UserControl>

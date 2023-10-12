@@ -30,12 +30,10 @@ namespace ModuleListy.ViewModels
             Jednostki = new ObservableCollection<JednostkaPlywajaca>();
             FormySluzby = new ObservableCollection<FormaSluzby>();
 
-            LoadListMarynarzy();
-            LoadListJednostki();
-            LoadListFormySluzby();
+            Load();
         }
 
-        #region OCollection
+        #region Collection
         public ObservableCollection<Marynarz> Marynarze
         {
             get { return _marynarze; }
@@ -54,20 +52,12 @@ namespace ModuleListy.ViewModels
         #endregion
 
         #region LoadList
-        private void LoadListFormySluzby()
+        private void Load()
         {
             var formySluzby = new FormaSluzbyService();
             FormySluzby = new ObservableCollection<FormaSluzby>(formySluzby.GetAll());
-        }
-
-        private void LoadListJednostki()
-        {
             var jednPlywService = new JednostkaPlywajacaService();
             Jednostki = new ObservableCollection<JednostkaPlywajaca>(jednPlywService.GetAll());
-        }
-
-        private void LoadListMarynarzy()
-        {
             var marynarzService = new MarynarzService();
             Marynarze = new ObservableCollection<Marynarz>(marynarzService.GetAll());
         }
