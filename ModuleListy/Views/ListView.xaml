@@ -19,9 +19,9 @@
         </GroupBox>
 
 
-        <GroupBox Header="Zadania" Grid.Row="2" Margin="5" MinWidth="150">
+        <Expander Header="Zadania" Grid.Row="2" Margin="5" MinWidth="150">
         <ListBox ItemsSource="{Binding FormySluzby, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Sluzba" SelectedItem="{Binding SelectedFormaSluzby}" />
-        </GroupBox>
+        </Expander>
         
         <Expander Header="Jednostki pływające" Grid.Row="3" Margin="5" MinWidth="150">
         <ListBox ItemsSource="{Binding Jednostki, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="JednPlyw" SelectedItem="{Binding SelectedJednPlyw}" />

@@ -17,6 +17,10 @@ namespace ModuleEdycja.ViewModels
         private JednostkaPlywajaca _selectedJednPlyw;
         private FormaSluzby _selectedFormaSluzby;
 
+        private bool _isEditing;
+        public DelegateCommand EditCommand { get; set; }
+        public DelegateCommand SaveCommand { get; set; }
+
         public EdycjaViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             _eventAggregator = eventAggregator;
@@ -24,29 +28,29 @@ namespace ModuleEdycja.ViewModels
             _eventAggregator.GetEvent<SelectedMarynarzEvent>().Subscribe(UpdateSelectedMarynarz);
             _eventAggregator.GetEvent<SelectedJednPlywEvent>().Subscribe(UpdateSelectedJednPlyw);
             _eventAggregator.GetEvent<SelectedFormaSluzbyEvent>().Subscribe(UpdateSelectedFormaSluzby);
+
+            EditCommand = new DelegateCommand(StartEditing);
+            SaveCommand = new DelegateCommand(SaveChanges, CanSave).ObservesProperty(() => IsEditing);
         }
 
-        private bool _isEnabled;
-
-        public bool IsEnabled
+        public bool IsEditing
         {
-            get { return _isEnabled; }
-            set {SetProperty (ref _isEnabled, value); }
+            get {  return _isEditing; }
+            set { SetProperty(ref _isEditing, value); }
         }
-
-        private DelegateCommand _buttonEditCommand;
-        public DelegateCommand ButtonEditCmd
+        private void StartEditing()
         {
-            get
-            {
-                if (_buttonEditCommand == null) _buttonEditCommand = new DelegateCommand(IsEnabledAction);
-                return _buttonEditCommand;
-            }
+            IsEditing = true;
         }
-
-        private void IsEnabledAction()
+        private void SaveChanges()
         {
-            IsEnabled = true;
+            //
+            //
+            IsEditing = false;
+        }
+        private bool CanSave()
+        {
+            return IsEditing;
         }
 
         private void UpdateSelectedMarynarz(Marynarz marynarz)
@@ -107,6 +111,5 @@ namespace ModuleEdycja.ViewModels
             var view = region.GetView(viewName);
             region.Activate(view);
         }
-
     }
 }
