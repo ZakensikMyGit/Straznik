@@ -31,8 +31,7 @@ namespace ModuleEdycja.ViewModels
 
             EditCommand = new DelegateCommand(StartEditing);
             SaveCommand = new DelegateCommand(SaveChanges, CanSave).ObservesProperty(() => IsEditing);
-<<<<<<< HEAD
-=======
+
         }
 
         public bool IsEditing
@@ -43,39 +42,6 @@ namespace ModuleEdycja.ViewModels
         private void StartEditing()
         {
             IsEditing = true;
-        }
-        private void SaveChanges()
-        {
-            //
-            //
-            IsEditing = false;
-        }
-        private bool CanSave()
-        {
-            return IsEditing;
->>>>>>> af429c3f4a4bec1a9e0d269ff2cd5d7b002c50fa
-        }
-
-        public bool IsEditing
-        {
-            get {  return _isEditing; }
-            set { SetProperty(ref _isEditing, value); }
-        }
-<<<<<<< HEAD
-        private void StartEditing()
-        {
-            IsEditing = true;
-=======
-
-        private DelegateCommand _EditCommand;
-        public DelegateCommand EditCmd
-        {
-            get
-            {
-                if (_EditCommand == null) _EditCommand = new DelegateCommand(IsEnabledAction);
-                return _EditCommand;
-            }
->>>>>>> af429c3f4a4bec1a9e0d269ff2cd5d7b002c50fa
         }
         private void SaveChanges()
         {
