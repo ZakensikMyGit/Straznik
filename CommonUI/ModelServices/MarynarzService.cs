@@ -1,14 +1,18 @@
-﻿using CommonUI.Models;
+﻿using CommonUI.Events;
+using CommonUI.Models;
 using CommonUI.ModelServices;
+using Prism.Events;
 
 namespace CommonUI.ModelServices
 {
     public class MarynarzService : IMarynarzService
     {
+        private readonly IEventAggregator _eventAggregator;
         private List<Marynarz> Marynarze;
 
-        public MarynarzService()
+        public MarynarzService(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             Marynarze = new List<Marynarz>()
             {
             new Marynarz { Imie = "Zbigniew", Nazwisko = "Karaś", Stopien = "Kapitan" },
@@ -32,12 +36,13 @@ namespace CommonUI.ModelServices
             {
                 aktualnyMarynarz.Stopien = updateMarynarz.Stopien;
             }
+             _eventAggregator.GetEvent<UpdatedMarynarzEvent>().Publish();
         }
     }
 }
 
 // DLA BAZY DANYCH
-//    private readonly DbContext _dbContext; // Zakładam, że korzystasz z Entity Framework
+//  Entity Framework
 
 //public MarynarzService(DbContext dbContext)
 //{

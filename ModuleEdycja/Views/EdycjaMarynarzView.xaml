@@ -19,18 +19,18 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Imię:" Grid.Row="0" Grid.Column="0" Margin="5" />
-            <TextBox Text="{Binding SelectedMarynarz.Imie, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled}" Grid.Row="0" Grid.Column="1" Margin="5" HorizontalAlignment="Left" FontSize="15"/>
+            <TextBox Text="{Binding SelectedMarynarz.Imie, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEditing}" Grid.Row="0" Grid.Column="1" Margin="5" HorizontalAlignment="Left" FontSize="15"/>
 
                 <TextBlock Text="Nazwisko:" Grid.Row="1" Grid.Column="0" Margin="5"/>
-            <TextBox Text="{Binding SelectedMarynarz.Nazwisko, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled}" Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Left" FontSize="15" />
+            <TextBox Text="{Binding SelectedMarynarz.Nazwisko, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEditing}" Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Left" FontSize="15" />
 
                 <TextBlock Text="Stopień:" Grid.Row="2" Grid.Column="0" Margin="5"/>
-            <TextBox Text="{Binding SelectedMarynarz.Stopien, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled}" Grid.Row="2" Grid.Column="1" Margin="5" HorizontalAlignment="Left" FontSize="15" />
+            <TextBox Text="{Binding SelectedMarynarz.Stopien, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEditing}" Grid.Row="2" Grid.Column="1" Margin="5" HorizontalAlignment="Left" FontSize="15" />
 
             <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
 
                 <Button Content="Edytuj" Command="{Binding EditCommand}" Margin="5,0" />
-                <Button Content="Zapisz" Command="{Binding SaveCommand}" Margin="5,0" IsEnabled="{Binding IsEnabled}"/>
+                <Button Content="Zapisz" Command="{Binding SaveCommand}" Margin="5,0" IsEnabled="{Binding IsEditing}"/>
 
             </StackPanel>
 

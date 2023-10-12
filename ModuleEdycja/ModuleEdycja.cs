@@ -1,4 +1,5 @@
-﻿using ModuleEdycja.Views;
+﻿using CommonUI.ModelServices;
+using ModuleEdycja.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -26,7 +27,7 @@ namespace ModuleEdycja
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            //containerRegistry.RegisterSingleton<MarynarzeService, MarynarzeService>();
+            containerRegistry.RegisterSingleton<IMarynarzService, MarynarzService>();
             //containerRegistry.RegisterSingleton<JednostkaPlywajacaService, JednostkaPlywajacaService>();
             //containerRegistry.RegisterSingleton<FormaSluzbyService, FormaSluzbyService>();
         }

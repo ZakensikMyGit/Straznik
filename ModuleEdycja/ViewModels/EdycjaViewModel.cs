@@ -1,5 +1,6 @@
 ﻿using CommonUI.Events;
 using CommonUI.Models;
+using CommonUI.ModelServices;
 using ModuleEdycja.Views;
 using Prism.Commands;
 using Prism.Events;
@@ -16,18 +17,20 @@ namespace ModuleEdycja.ViewModels
         private Marynarz _selectedMarynarz;
         private JednostkaPlywajaca _selectedJednPlyw;
         private FormaSluzby _selectedFormaSluzby;
+        private readonly IMarynarzService _marynarzService;
 
         private bool _isEditing;
         public DelegateCommand EditCommand { get; set; }
         public DelegateCommand SaveCommand { get; set; }
 
-        public EdycjaViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
+        public EdycjaViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IMarynarzService marynarzService)
         {
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
             _eventAggregator.GetEvent<SelectedMarynarzEvent>().Subscribe(UpdateSelectedMarynarz);
             _eventAggregator.GetEvent<SelectedJednPlywEvent>().Subscribe(UpdateSelectedJednPlyw);
             _eventAggregator.GetEvent<SelectedFormaSluzbyEvent>().Subscribe(UpdateSelectedFormaSluzby);
+            _marynarzService = marynarzService;
 
             EditCommand = new DelegateCommand(StartEditing);
             SaveCommand = new DelegateCommand(SaveChanges, CanSave).ObservesProperty(() => IsEditing);
@@ -45,8 +48,10 @@ namespace ModuleEdycja.ViewModels
         }
         private void SaveChanges()
         {
-            //
-            //
+            if (SelectedMarynarz != null)
+            {
+                _marynarzService.Update(SelectedMarynarz);
+            }
             IsEditing = false;
         }
         private bool CanSave()

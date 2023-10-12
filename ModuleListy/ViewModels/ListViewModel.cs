@@ -17,19 +17,31 @@ namespace ModuleListy.ViewModels
     public class ListViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggragator;
-
+        private readonly IMarynarzService _marynarzService;
+        private readonly JednostkaPlywajacaService _jednostkiPlywajaceService;
+        private readonly FormaSluzbyService _formaSluzbyService;
         private ObservableCollection<Marynarz> _marynarze;
         private ObservableCollection<JednostkaPlywajaca> _jednostki;
         private ObservableCollection<FormaSluzby> _formySluzby;
 
-        public ListViewModel(IEventAggregator eventAggregator, MarynarzService marynarzService, JednostkaPlywajacaService jednPlywService, FormaSluzbyService formaSluzbyService)
+        public ListViewModel(IEventAggregator eventAggregator, IMarynarzService marynarzService, JednostkaPlywajacaService jednPlywService, FormaSluzbyService formaSluzbyService)
         {
             _eventAggragator = eventAggregator;
+            _marynarzService = marynarzService;
+            _jednostkiPlywajaceService = jednPlywService;
+            _formaSluzbyService = formaSluzbyService;
 
             Marynarze = new ObservableCollection<Marynarz>();
             Jednostki = new ObservableCollection<JednostkaPlywajaca>();
             FormySluzby = new ObservableCollection<FormaSluzby>();
 
+            Load();
+
+            _eventAggragator.GetEvent<UpdatedMarynarzEvent>().Subscribe(OnDataUpdated);
+        }
+
+        private void OnDataUpdated()
+        {
             Load();
         }
 
@@ -58,8 +70,7 @@ namespace ModuleListy.ViewModels
             FormySluzby = new ObservableCollection<FormaSluzby>(formySluzby.GetAll());
             var jednPlywService = new JednostkaPlywajacaService();
             Jednostki = new ObservableCollection<JednostkaPlywajaca>(jednPlywService.GetAll());
-            var marynarzService = new MarynarzService();
-            Marynarze = new ObservableCollection<Marynarz>(marynarzService.GetAll());
+            Marynarze = new ObservableCollection<Marynarz>(_marynarzService.GetAll());
         }
         #endregion
 
