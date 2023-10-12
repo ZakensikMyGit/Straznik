@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ModelServices\JednostkaPlywajacaService.cs\**" />
+    <EmbeddedResource Remove="ModelServices\JednostkaPlywajacaService.cs\**" />
+    <None Remove="ModelServices\JednostkaPlywajacaService.cs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\RozaWiatrow.ico" />
+    <None Remove="Resources\RozaWiatrow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\RozaWiatrow.ico" />
+  </ItemGroup>
+
+</Project>

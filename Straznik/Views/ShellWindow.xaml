@@ -1,0 +1,26 @@
+﻿<mah:MetroWindow x:Class="Straznik.Views.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:prism="http://prismlibrary.com/"
+                 Title="Strażnik" FontSize="20"
+                 BorderBrush="{DynamicResource AccentColorBrush}"
+                 BorderThickness="2"
+                 ResizeMode="CanResizeWithGrip">
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button FontSize="10">Przycisk</Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ContentControl prism:RegionManager.RegionName="ShellWindowRegionModuleListy" Grid.Column="0"/>
+        <ContentControl  prism:RegionManager.RegionName="ShellWindowRegionModuleEdycja" Grid.Column="1" />
+        
+    </Grid>
+</mah:MetroWindow>
